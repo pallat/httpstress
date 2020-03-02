@@ -50,7 +50,7 @@ func main() {
 		Handler: othttp.NewHandler(r, hostname,
 			othttp.WithMessageEvents(othttp.ReadEvents, othttp.WriteEvents),
 		),
-		Addr:         "127.0.0.1:" + viper.GetString("port"),
+		Addr:         "0.0.0.0:" + viper.GetString("port"),
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
@@ -63,18 +63,18 @@ func main() {
 	shutdown(srv)
 }
 
+var client = &http.Client{
+	Transport: &http.Transport{
+		MaxConnsPerHost: 0,
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		// DisableKeepAlives:   true,
+	},
+	Timeout: 5 * time.Second,
+}
+
 func handler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("content-type", "application/json")
-
-	client := &http.Client{
-		Transport: &http.Transport{
-			MaxIdleConnsPerHost: 1000,
-			MaxConnsPerHost:     1000,
-			TLSClientConfig:     &tls.Config{InsecureSkipVerify: true},
-		},
-		Timeout: 5 * time.Second,
-	}
 
 	req, err := http.NewRequest(http.MethodGet, viper.GetString("services.check.url"), nil)
 	if err != nil {

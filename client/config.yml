@@ -1,7 +1,7 @@
 port: "8081"
 services:
   check:
-    url: "httpstress_server_1:8080/build"
+    url: "http://httpstress_server_1:8080/build"
 
 redis:
   host: localhost

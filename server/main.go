@@ -49,7 +49,7 @@ func main() {
 		Handler: othttp.NewHandler(r, hostname,
 			othttp.WithMessageEvents(othttp.ReadEvents, othttp.WriteEvents),
 		),
-		Addr:         "127.0.0.1:" + viper.GetString("port"),
+		Addr:         "0.0.0.0:" + viper.GetString("port"),
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
