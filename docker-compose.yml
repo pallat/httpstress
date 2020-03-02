@@ -1,0 +1,14 @@
+version: '2'
+services:
+  server:
+    build: ./server
+    image: server
+    ports:
+      - "8080:8080"
+  client:
+    build: ./client
+    image: client
+    links:
+      - server
+    ports:
+      - "8081:8081"

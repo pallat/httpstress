@@ -1,0 +1,43 @@
+port: "8080"
+services:
+  walletDiscovery:
+    address: "localhost:10001"
+  lookup:
+    url: ""
+
+redis:
+  host: localhost
+  port: 6379
+
+devmode: true
+
+LogLevel: debug
+GRPCInternalAPIServerPort: 9091
+NodeID: hub1
+DPKITendermintRPCHost: localhost
+DPKITendermintRPCPort: 55000
+ProviderHTTPProtocol: http
+VerifierHTTPProtocol: http
+WalletDiscovery:
+  HTTPAPIServerAddress: "http://127.0.0.1:8081"
+  GRPCInternalAPIServerAddress: "localhost:9091"
+CurrecyOwnership:
+  GRPCInternalAPIServerAddress: "localhost:9092"
+TransferAdapter:
+  LookupPromptpay: "http://127.0.0.1:22222/callback_lookup"
+  TransferPromptpay: "http://127.0.0.1:22222/callback_transfer"
+  LookupAccount: "http://127.0.0.1:22222/callback_lookup_account"
+  TransferAccount: "http://127.0.0.1:22222/callback_transfer"
+  # LookupPromptpay: "http://10.9.214.101:30001/tfr-adt/api/v1/ofplookups"
+  # TransferPromptpay: "10.9.214.101:30002/tfr-adt/api/v1/transferOfpOfpNon"
+  # LookupAccount: "http://10.9.214.101:30001/tfr-adt/api/v1/ofplookups"
+  # TransferAccount: "http://10.9.214.101:30002/tfr-adt/api/v1/transferOfpOfpNon"
+DPKIApi:
+  GRPCServerAddress: "localhost:9071"
+
+security:
+  AllowedRequestTimeDifferenceSeconds: 30
+  DisableRequesterSignatureCheck: false
+  DisableRequesterPermissionsCheck: false
+  DisableRequesterTimeDifferenceCheck: false
+  DisableRequesterNonceCheck: false
